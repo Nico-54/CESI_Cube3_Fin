@@ -5,33 +5,33 @@
   
             <div class="inputbox">
                 <label>Nom</label>
-                <input placeholder="Nom" type="text"/>
+                <input placeholder="Nom" type="text" v-model="name"/>
             </div>
   
             <div class="inputbox">    
                 <label>Prenom</label>
-                <input placeholder="Prenom" type="text" />
+                <input placeholder="Prenom" type="text" v-model="prenom" />
             </div>
   
             <div class="inputbox">    
                 <label>Mot de passe</label>
-                <input placeholder="Mot de passe" type="password" />
+                <input placeholder="Mot de passe" type="password" v-model="password"/>
             </div>
   
             <div class="inputbox">    
                 <label>Adresse Mail</label>
-                <input placeholder="Email" type="email" />
+                <input placeholder="Email" type="email" v-model="email"/>
             </div>
   
             <div class="inputbox">    
                 <label>Entreprise</label>
-                <input placeholder="Entreprise" type="text" />
+                <input placeholder="Entreprise" type="text" v-model="entreprise"/>
             </div>
             
-            <input type="checkbox" name="cgv" id="cgv">
+            <!--<input type="checkbox" name="cgv" id="cgv">
             <label for="cgv" class="cgv">En cochant cette case, vous concentez à nos CGV et nos CGU</label>
-  
-            <input type="submit" value="Inscription">
+  -->
+            <input type="submit" value="Inscription" v-on:click="signUp">
         
         </div>
     </div>
@@ -39,7 +39,23 @@
 
 <script>
 export default{
-    name: 'SignUp'
+    name: 'SignUp', 
+    data()
+    {
+      return {
+        name:'',
+        prenom:'',
+        password:'',
+        email:'',
+        entreprise:''
+      }
+    }, 
+    methods:{
+      signUp()
+      {
+        console.warn("signup")
+      }
+    }
 }
 </script>
   

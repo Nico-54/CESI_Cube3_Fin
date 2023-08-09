@@ -40,6 +40,10 @@
         <h2>Prix:</h2>
         <h2>X €</h2>
     </div>
+
+    <div class="check">
+        <input type="checkbox" name="abo" id="abo">Reconduite tacite de l'abonnement. A décocher pour le désactiver
+    </div>
     
 </template>
 

@@ -3,14 +3,14 @@
       <div class="about">
         <div class="bord">
           <h1>Formule Amélioration :</h1>
-          <h2>Module Action / Accident</h2>
+          <span>Module Action / Accident</span>
         </div>
       </div>
   
       <div class="about2">
         <div class="bord2">
           <h1>Prix :</h1>
-          <h2>X €</h2>
+          <span>X €</span>
         </div>
       </div>
     </div>
@@ -18,8 +18,9 @@
     <div class="facture">
       <h1>Dernières Factures</h1>
       <div class="doc">
-        <h2>facture.pdf</h2>
-        <h2>facture.csv</h2>
+        <span>facture.pdf</span>
+        <br>
+        <span>facture.csv</span>
       </div>
   
       <div class="all">
@@ -39,14 +40,14 @@ export default{
 </script>
   
 <style lang="scss">
-$backTest: green;
+$backTest: whitesmoke;
 
 .formule{
   margin-top: 50px;
   margin-left: 46%;
   width: 160px;
   height: 42px;
-  background: blue;
+  background: rgba(225,100,20,1.0);
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -63,7 +64,7 @@ $backTest: green;
   margin-left: 46%;
   width: 160px;
   height: 42px;
-  background: blue;
+  background: rgba(225,100,20,1.0);
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -76,13 +77,18 @@ $backTest: green;
 }
 
 .facture{
-  margin-top: 100px;
+  margin-top: 150px;
   background: $backTest;
   text-align: center;
+  padding: 10px 0;
 }
 
 .doc{
   margin-top: 20px;
+}
+.doc span{
+  display: block;
+  margin-bottom: 10px;
 }
 
 .test{
@@ -118,8 +124,13 @@ $backTest: green;
     //box-shadow: 0 0 20px 0 rgba(0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0.24);
 }
 
-.bord2 h2, .bord h2{
+.bord2 span, .bord span{
   margin-top: 10px;
+  display: block;
+}
+
+span{
+  font-size: larger;
 }
 
 

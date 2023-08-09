@@ -1,0 +1,20 @@
+{
+  "user": [
+    {
+      "name": "Doe",
+      "prenom": "John",
+      "password": "abc@12",
+      "email": "john.doe@test.com",
+      "entreprise": "Smile",
+      "id": 1
+    },
+    {
+      "name": "Parker",
+      "prenom": "Peter",
+      "password": "abc@123",
+      "email": "peter@test.com",
+      "entreprise": "SpideySociety",
+      "id": 2
+    }
+  ]
+}

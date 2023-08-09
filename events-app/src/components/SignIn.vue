@@ -1,5 +1,5 @@
 <template>
-    <img class="logo" src="../assets/logo.png" alt="Vue logo">
+    <img class="logo" src="../assets/mp-logo.png" alt="Vue logo">
 
     <div class="connexion">
         <div class="oui">
