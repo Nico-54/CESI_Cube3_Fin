@@ -1,4 +1,10 @@
 <template>
+    <nav>
+        <router-link to="/infos">Abonnement</router-link> |
+        <router-link to="/profil">Profil</router-link> |
+        <button @click="logout">Déconnexion</button>
+    </nav>
+
     <div class="test">
       <div class="about">
         <div class="bord">
@@ -18,33 +24,60 @@
     <div class="facture">
       <h1>Dernières Factures</h1>
       <div class="doc">
-        <span>facture.pdf</span>
+        <span><a href="../assets/pdf/TP_ALGO_OIE_SCRABBLE.pdf" target="_blank">facture.pdf</a></span>
+        
         <br>
         <span>facture.csv</span>
       </div>
   
+      <div class="buttons">
+
       <div class="all">
         <a href="/facture">Toutes les factures</a>
       </div>
+
+      <div class="formule">
+        <a href="/formule">Modifier ma formule</a>
+      </div>
+
+    </div>
     </div>
   
-    <div class="formule">
-      <a href="#">Modifier ma formule</a>
-    </div>
 </template>
 
 <script>
 export default{
-    name: 'SubsInfos'
+    name: 'SubsInfos', 
 }
 </script>
   
 <style lang="scss">
 $backTest: whitesmoke;
 
+nav {
+  text-align: center;
+  padding: 30px;
+  background: rgba(225,100,20,1.0);
+
+  a {
+    font-weight: bold;
+    color: #2c3e50;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
+
+.buttons{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .formule{
   margin-top: 50px;
-  margin-left: 46%;
+  //margin-left: 46%;
   width: 160px;
   height: 42px;
   background: rgba(225,100,20,1.0);
@@ -61,7 +94,7 @@ $backTest: whitesmoke;
 
 .all{
   margin-top: 50px;
-  margin-left: 46%;
+  //margin-left: 46%;
   width: 160px;
   height: 42px;
   background: rgba(225,100,20,1.0);
@@ -77,10 +110,12 @@ $backTest: whitesmoke;
 }
 
 .facture{
-  margin-top: 150px;
+  margin: 150px 700px;
   background: $backTest;
   text-align: center;
   padding: 10px 0;
+  width: 600px;
+  border-radius: 2%;
 }
 
 .doc{
@@ -107,6 +142,7 @@ $backTest: whitesmoke;
     padding: 30px;
     border: 1px solid #f1f1f1;
     background: #fff;
+    border-radius: 2%;
     //box-shadow: 0 0 20px 0 rgba(0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0.24);
 }
 
@@ -121,6 +157,7 @@ $backTest: whitesmoke;
     border: 1px solid #f1f1f1;
     background: #fff;
     text-align: center;
+    border-radius: 2%;
     //box-shadow: 0 0 20px 0 rgba(0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0.24);
 }
 

@@ -1,5 +1,4 @@
 <template>
-  <!--<SignIn />-->
   <RouterView/>
 </template>
 

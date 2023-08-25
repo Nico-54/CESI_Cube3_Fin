@@ -15,8 +15,30 @@
   
             <div class="inputbox">    
                 <label>Mot de passe</label>
-                <input placeholder="Mot de passe" type="password" v-model="password"/>
+                <input placeholder="Mot de passe" type="password" v-model="password" minlength="8"/>
             </div>
+            <div class="inputbox">    
+                <label>Mot de passe - verif</label>
+                <input placeholder="Mot de passe" type="password" v-model="passwordVerif" minlength="8"/>
+            </div>
+
+            <div class="inputbox">    
+                <label>Adresse Postal</label>
+                <input placeholder="Adresse" type="text" v-model="adresse"/>
+            </div>
+            <div class="inputbox">    
+                <label>Code Postal</label>
+                <input placeholder="Code Postal" type="text" v-model="postal"/>
+            </div>
+            <div class="inputbox">    
+                <label>Ville</label>
+                <input placeholder="Ville" type="text" v-model="ville"/>
+            </div>
+
+            <!--<div class="inputbox">    
+                <label>Téléphone</label>
+                <input placeholder="Téléphone" type="text" v-model="telephone" maxlength="10"/>
+            </div>-->
   
             <div class="inputbox">    
                 <label>Adresse Mail</label>
@@ -32,12 +54,16 @@
             <label for="cgv" class="cgv">En cochant cette case, vous concentez à nos CGV et nos CGU</label>
   -->
             <input type="submit" value="Inscription" v-on:click="signUp">
+<br><br>
+            <span style="color:red; font-size: small;">{{ error }}</span>
         
         </div>
     </div>
   </template>
 
 <script>
+import axios from 'axios'
+
 export default{
     name: 'SignUp', 
     data()
@@ -46,15 +72,86 @@ export default{
         name:'',
         prenom:'',
         password:'',
+        passwordVerif:'',
         email:'',
-        entreprise:''
+        entreprise:'',
+        ville: '',
+        adresse: '',
+        postal: '',
+        error:''
       }
     }, 
     methods:{
-      signUp()
-      {
-        console.warn("signup")
+      async signUp(){
+
+        if (!this.email || !this.password || !this.passwordVerif || !this.prenom || !this.name || !this.entreprise || !this.ville || !this.adresse || !this.postal) {
+        //console.error("Veuillez remplir tous les champs.");
+        this.error = "Veuillez remplir tous les champs.";
+        return;
+      } 
+      if (this.password.length < 8){
+        this.error = "Mot de passe trop court.";
+        return;
       }
+      if (this.password !== this.passwordVerif){
+        this.error = "Vos mots de passe sont différents";
+        return;
+      }
+
+      const cleanedEmail = this.email.trim();
+      const cleanedName = this.name.trim();
+      const cleanedPrenom = this.prenom.trim();
+      const cleanedEntreprise = this.entreprise.trim();
+      const cleanedVille = this.ville.trim();
+      const cleanedAddress = this.adresse.trim();
+      const cleanedPostal = this.postal.trim();
+      const cleanedPassword = this.password;
+
+      // Validation du numéro de téléphone avec une regex
+      /*const phoneRegex = /^(06|09|07)[0-9]{8}$/;
+      if (!phoneRegex.test(cleanedTel)) {
+        this.error = "Numéro de téléphone invalide. Veuillez entrer un numéro à 10 chiffres commençant par 06 ou 09.";
+        return;
+      }*/
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(cleanedEmail)) {
+        this.error = "Adresse e-mail invalide. Veuillez entrer une adresse e-mail valide.";
+        return;
+      }
+      
+      try{
+
+       const result = await axios.post("http://localhost:3000/users", {
+          lastName:cleanedName,
+          firstName:cleanedPrenom,
+          pwd:cleanedPassword,
+          email:cleanedEmail,
+          companyName:cleanedEntreprise,
+          companyAddress:cleanedAddress,
+          companyPostCode:cleanedPostal,
+          companyCity:cleanedVille,
+        });
+
+        if(result.status==201){
+          this.$router.push({name:'connexion'})
+          //localStorage.setItem("user-info", JSON.stringify(result.data))
+        } else {
+          this.error = "Erreur d'inscription.";
+        }
+      }catch(error){
+        this.error = "Une erreur s'est produite : ", error;
+        console.log(error);
+      }
+    }
+      /*{
+        
+        console.warn(result);
+        if(result.status==201){
+          this.$router.push({name:'connexion'})
+          localStorage.setItem("user-info", JSON.stringify(result.data))
+        }
+      }*/
     }
 }
 </script>
@@ -76,8 +173,7 @@ export default{
 .connexion{
   width: 400px;
   //width: 535px;
-  margin: 0 auto;
-  margin-top: 4%;
+  margin: 1% auto;
 }
 
 .connexion h1{
