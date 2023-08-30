@@ -5,17 +5,24 @@ const authentification = require('../middlewares/authentification');
 const router = new express.Router();
 
 
+
+
 // CREATE USER
 router.post('/users', async (req, res) => {
     try {
         const user = new User(req.body);
 
+        user.role = 'utilisateur';
+
         user.userCreated = new Date();
 
-        const company = await Company.findOne({ companyName: req.body.companyName });
+        let company = await Company.findOne({ companyName: req.body.companyName });
+
         if (!company) {
             return res.status(400).send("L'entreprise spécifiée n'est pas valide.");
+
         }
+
         user.idCompany = company._id;
         const authToken = await user.generateAuthTokenAndSaveUser();
 
@@ -54,9 +61,12 @@ router.post('/users/logout', authentification, async (req, res) => {
 });
 
 
-// LOGOUT ALL - SUPP ALL TOKEN
+// LOGOUT ALL - SUPP ALL TOKEN - BY SUPER_ADMIN
 router.post('/users/logout/all', authentification, async (req, res) => {
     try {
+        if (req.user.role !== 'super_admin') {
+            return res.status(403).send("Accès interdit - Réservé aux super admins");
+        }
         req.user.authTokens = [];
         await req.user.save();
         res.send();
@@ -87,6 +97,20 @@ router.get('/users/me', authentification, async (req, res) => {
         });
     } catch (e) {
         res.status(500).send(e)
+    }
+});
+
+// READ INFO ALL USER BY SUPER_ADMIN
+router.get('/users', authentification, async (req, res) => {
+    try {
+        if (req.user.role !== 'super_admin') {
+            return res.status(403).send("Accès interdit - Réservé aux super admins");
+        }
+
+        const users = await User.find();
+        res.send(users);
+    } catch (e) {
+        res.status(500).send(e);
     }
 });
 

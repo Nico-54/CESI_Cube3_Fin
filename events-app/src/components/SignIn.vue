@@ -16,11 +16,14 @@
           </div>
 
           <input type="submit" value="Connexion" v-on:click="login">
+
           <br><br>
+
           <span style="color:red; font-size: small;">{{ error }}</span>
+
           <div v-if="errorMessage" class="error-message">
                 {{ errorMessage }}
-            </div>
+          </div>
       </div>
 </div>
 

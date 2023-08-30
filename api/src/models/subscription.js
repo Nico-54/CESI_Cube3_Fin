@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const subscriptionSchema = 
 new Schema({idCompany: { type: Schema.Types.ObjectId, ref: 'Company' },
-            idPrice:{ type: Schema.Types.ObjectId, ref: 'Price' },
+            idFormula:{ type: Schema.Types.ObjectId, ref: 'Formula' },
             renewal: Boolean,
             startDate: Date,
             endDate: Date,

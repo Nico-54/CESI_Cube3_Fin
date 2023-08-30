@@ -32,3 +32,19 @@
     "lastName" : "Gasly",
     "email": "PierreG@test.com",
     "pwd": "123456789"
+
+    "firstName" : "Yuki",
+    "lastName" : "Tsunoda",
+    "email": "Yuki@test.com",
+    "pwd": "123456789",
+    "companyName":"company2"
+
+        "email": "superadmin@test.com",
+        "pwd": "Azerty01"
+
+
+    "firstName" : "Carlos",
+    "lastName" : "Sainz",
+    "email": "SCarlos@test.com",
+    "pwd": "123456789",
+    "companyName":"Ferrari"

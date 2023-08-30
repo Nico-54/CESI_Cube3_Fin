@@ -33,7 +33,7 @@ new Schema({idCompany: { type: Schema.Types.ObjectId, ref: 'Company' },
 
 // Function generateAuthTokenAndSaveUser - Manage Token
 userSchema.methods.generateAuthTokenAndSaveUser = async function () {
-  const authToken = jwt.sign({ _id: this._id.toString() }, 'secret', { expiresIn: '30m' });
+  const authToken = jwt.sign({ _id: this._id.toString() }, 'secret', { expiresIn: '60m' });
   // save token in BDD
   this.authTokens.push({ authToken });
   await this.save();

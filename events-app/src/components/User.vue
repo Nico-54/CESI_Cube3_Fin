@@ -86,7 +86,6 @@ export default {
         companyAddress: '', 
         companyCity: '', 
         companyPostCode: '',
-        validationMessage: '',
       }
     };
   },

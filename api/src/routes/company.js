@@ -16,15 +16,20 @@ router.post('/companies', async (req, res) => {
 });
 
 
-// READ ALL COMPANY
-router.get('/companies', async (req, res) => {
+// READ ALL COMPANY BY SUPER_ADMIN
+router.get('/companies', authentification, async (req, res) => {
     try {
+        if (req.user.role !== 'super_admin') {
+            return res.status(403).send("Accès interdit - Réservé aux super admins");
+        }
+
         const companies = await Company.find();
         res.send(companies);
     } catch (e) {
         res.status(500).send(e);
     }
 });
+
 
 
 //READ COMPANY BY CURRENT USER

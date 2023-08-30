@@ -94,7 +94,6 @@ router.beforeEach((to, from, next) => {
       store.commit('setLoginErrorMessage', 'Vous devez être connecté pour accéder à cette page.');
       next('/connexion');
     } else {
-
       next();
     }
   } else {
