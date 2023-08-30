@@ -22,8 +22,11 @@ export default new Vuex.Store({
       // Supprimez également le cookie du jeton lorsque vous vous déconnectez
       Cookies.remove('authToken');
     }, 
+    setValidationMessage(state, message) {
+      state.validationMessage = message;
+    },
     setLoginErrorMessage(state, message) {
-      state.loginErrorMessage = message;
+      state.errorMessage = message;
     },
   },
 });

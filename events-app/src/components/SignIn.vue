@@ -18,7 +18,9 @@
           <input type="submit" value="Connexion" v-on:click="login">
           <br><br>
           <span style="color:red; font-size: small;">{{ error }}</span>
-          <span style="color: red; font-size: small;">{{ LoginErrorMessage }}</span>
+          <div v-if="errorMessage" class="error-message">
+                {{ errorMessage }}
+            </div>
       </div>
 </div>
 
@@ -31,8 +33,6 @@
 <script>
 import axios from 'axios';
 import store from '@/store';
-import Cookies from 'js-cookie'; // Importez js-cookie
-import { mapState } from 'vuex';
 
 
 export default{
@@ -46,8 +46,10 @@ export default{
     }
   }, 
   computed: {
-  ...mapState(['LoginErrorMessage']),
-},
+    errorMessage() {
+      return store.state.errorMessage;
+    },
+  },
   methods:{
     async login() {
     // Validation des données côté client
@@ -84,12 +86,8 @@ export default{
       // Vous pouvez maintenant accéder aux données de l'utilisateur et au jeton d'authentification
       store.commit('setUser', response.data.user);
       store.commit('setAuthToken', response.data.authToken);
-
-      // Stockez le jeton dans un cookie avec une date d'expiration (par exemple, 1 jour)
-      Cookies.set('authToken', response.data.authToken, { expires: 1 });
       
       console.log('Données de l\'utilisateur :', response.data.user);
-      console.log('Jeton d\'authentification :', response.data.authToken);
       // Puis redirigez l'utilisateur vers la page de profil
       this.$router.push({ name: 'profil' });
     } else {
@@ -182,5 +180,10 @@ align-content: center;
 flex-wrap: wrap;
 text-decoration: none;
 color: whitesmoke;
+}
+
+.error-message{
+  text-align: center;
+  color: #FF0000;
 }
 </style>

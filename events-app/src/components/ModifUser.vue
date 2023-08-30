@@ -1,157 +1,239 @@
 <template>
-    <nav>
-        <router-link to="/infos">Abonnement</router-link> |
-        <router-link to="/profil">Profil</router-link>
-    </nav>
+  <nav>
+      <router-link to="/infos">Abonnement</router-link> |
+      <router-link to="/profil">Profil</router-link> |
+      <button @click="logout">Déconnexion</button>
+  </nav>
 
-    <div class="infos">
-        <div class="profil">
-            <h1 id="page">Coordonnées</h1>
-            
-            <div class="societe">
-                <h2>Société :</h2>
-                <!--<span>Smile</span>-->
-                <input type="text" v-model="this.userInfo.entreprise">
-            </div>
-            
-            <hr>
+  <div class="infos">
+      <div class="profil">
+          <h1 id="page">Modifications</h1>
+          
+          <div class="name">
+              <h2>Nom :</h2>
+              <!--<span>Smile</span>-->
+              <ul><input type="text" v-model="userInfo.firstName"></ul>
+          </div>
 
-            <div class="mdp">
-                <h2>Mot de passe :</h2>
-                <!--<span>Smile</span>-->
-                <input type="text" v-model="this.userInfo.password">
-            </div>
-            
-            <hr>
+          <hr>
 
-            <div class="adressepostale">
-                <h2>Adresse :</h2>
-                <input type="text" v-model="this.userInfo.adresse">
-            </div>
+          <div class="prenom">
+              <h2>Prenom :</h2>
+              <!--<span>Smile</span>-->
+              <input type="text" v-model="userInfo.lastName">
+          </div>
 
-            <hr>
+          <hr>
 
-            <div class="cp">
-                <h2>Code Postal :</h2>
-                <input type="text" v-model="this.userInfo.codepostal">
-            </div>
+          <div class="societe">
+              <h2>Société :</h2>
+              <!--<span>Smile</span>-->
+              <input type="text" v-model="userInfo.companyName">
+          </div>
+          
+          <hr>
 
-            <hr>
+          <div class="adressepostale">
+              <h2>Adresse :</h2>
+              <!--<span>12 rue de la Tour</span>-->
+              <input type="text" v-model="userInfo.companyAddress">
+          </div>
 
-            <div class="ville">
-                <h2>Ville :</h2>
-                <input type="text" v-model="this.userInfo.ville">
-            </div>
+          <hr>
 
-            <hr>
-            
-            <div class="mail">
-                <h2>Adresse Email :</h2>
-                <input type="text" v-model="this.userInfo.email">
-            </div>
+          <div class="ville">
+              <h2>Ville :</h2>
+              <!--<span>Nancy</span>-->
+              <input type="text" v-model="userInfo.companyCity">
+          </div>
 
-            <hr>
+          <hr>
+          
+          <div class="mail">
+              <h2>Adresse Email :</h2>
+              <input type="text" v-model="userInfo.email">
+          </div>
 
-            <div class="phone">
-                <h2>Téléphone : </h2>
-                <input type="text" v-model="this.userInfo.phone">
-            </div>
+          <input class="modif" type="submit" value="Valider" v-on:click="modification">
 
-            <input type="submit" value="Modification" v-on:click="update">
+          <a href="/profil">
+              <div class="modif">
+                  Retour
+              </div>
+          </a>
 
-        </div>
-    </div>
+      
+      </div>
+  </div>
 </template>
 
 <script>
 import axios from 'axios';
+import store from '@/store';
+import Cookies from 'js-cookie'; // Importez le module js-cookie
+import router from '@/router';
 
-export default{
-    name: 'UserInfos',
-    data() {
-    return {
-      userInfo: {
-        entreprise: '',
-        email: '',
-        phone: ''
-      }
-    };
-  },
-  mounted() {
-    const userId = 1; // L'ID de l'utilisateur que vous souhaitez récupérer
-    this.fetchUserData(userId);
-  },
-  methods: {
-    fetchUserData(userId) {
-      axios.get(`http://localhost:3000/user?id=${userId}`)
-      .then(response => { 
-        console.log(response.data);
-        
-        if (Array.isArray(response.data) && response.data.length > 0) {
-          this.userInfo = response.data[0]; // Accédez à la première entrée du tableau
-        }
-      })
-
-      .catch(error => {
-        console.error('Erreur lors de la récupération des données de l\'utilisateur:', error);
-      });
+export default {
+name: 'UserInfos',
+data() {
+  return {
+    userInfo: {
+      email: '',
+      firstName: '',
+      lastName: '',
+      companyName: '', 
+      companyAddress: '', 
+      companyCity: '', 
+      companyPostCode: '',
+      validationMessage: '',
     }
+  };
+},
+mounted() {
+  // Récupérez le jeton d'authentification depuis le cookie
+  const authToken = Cookies.get('authToken');
+  
+  if (authToken) {
+    // Utilisez le jeton d'authentification pour récupérer les données de l'utilisateur
+    this.fetchUserData(authToken);
+  } else {
+    console.error('Aucun jeton d\'authentification trouvé.');
   }
-}; 
+},
+methods: {
+  async fetchUserData() {
+    try {
+      const authToken = store.state.authToken;
+      const response = await axios.get(
+        'http://localhost:3000/users/me',
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`
+          }
+        }
+      );
+      const res_comp = await axios.get(
+        'http://localhost:3000/companies/me',
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`
+          }
+        }
+      );
 
+      if (response.status === 200) {
+        this.userInfo = response.data.user;
+        this.userInfo.companyName = response.data.companyName || '';
+        this.userInfo.companyAddress = res_comp.data.companyAddress || '54';
+        this.userInfo.companyCity = res_comp.data.companyCity || '68';
+        this.userInfo.companyPostCode = res_comp.data.companyPostCode || '87';
+      } else {
+        console.error('Erreur lors de la récupération des données de l\'utilisateur');
+      }
+    } catch (error) {
+      console.error('Une erreur s\'est produite : ', error);
+    }
+  },
+  async modification() {
+    try {
+      const authToken = store.state.authToken;
+      
+      // Les données que vous souhaitez envoyer à l'API
+      const modifiedData = {
+        email: this.userInfo.email.trim(),
+        firstName: this.userInfo.firstName.trim(),
+        lastName: this.userInfo.lastName.trim(),
+        companyName: this.userInfo.companyName.trim(),
+        companyAddress: this.userInfo.companyAddress.trim(),
+        companyCity: this.userInfo.companyCity.trim(),
+        companyPostCode: this.userInfo.companyPostCode.trim()
+      };
+      
+      // Faites la requête à votre route API de modification
+      const response = await axios.patch(
+        'http://localhost:3000/users/me', // Modification
+        modifiedData,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`
+          }
+        }
+      );
+
+      if (response.status === 200) {
+        // La modification a réussi, vous pouvez faire quelque chose ici, comme afficher un message de succès.
+        console.log('Modification réussie');
+        store.commit('setValidationMessage', 'Modification réussie');
+        router.push('/profil')
+      } else {
+        console.error('Erreur lors de la modification des données de l\'utilisateur');
+      }
+    } catch (error) {
+      console.error('Une erreur s\'est produite : ', error);
+    }
+  },
+  logout() {
+    // Appelez la mutation de déconnexion pour effacer les données d'utilisateur et le jeton
+    store.commit('clearUserData');
+
+    // Redirigez l'utilisateur vers la page de connexion ou une autre page appropriée
+    router.push('/connexion'); // Remplacez '/login' par l'URL de votre page de connexion
+  },
+}
+};
 </script>
-    
+  
 <style lang="scss">
 
 nav {
-  text-align: center;
-  padding: 30px;
-  background: rgba(225,100,20,1.0);
+text-align: center;
+padding: 30px;
+background: rgba(225,100,20,1.0);
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+a {
+  font-weight: bold;
+  color: #2c3e50;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  &.router-link-exact-active {
+    color: #42b983;
   }
+}
 }
 
 hr{
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 h2{
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .modif{
-  margin-top: 50px;
-  //margin-left: 46%;
-  //width: 160px;
-  height: 42px;
-  background: rgba(225,100,20,1.0);
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-wrap: wrap;
-  font-size: larger;
+margin-top: 20px;
+//margin-left: 46%;
+//width: 160px;
+height: 42px;
+background: rgba(225,100,20,1.0);
+border-radius: 5px;
+display: flex;
+justify-content: center;
+align-content: center;
+flex-wrap: wrap;
+font-size: larger;
 }
 a{
-  text-decoration: none;
-  color: whitesmoke;
+text-decoration: none;
+color: whitesmoke;
 }
 
-.societe, .mail, .adressepostale, .cp, .ville, .mdp{
-    padding-top: 10px;
-    padding-bottom: 30px;
+.societe, .mail, .adressepostale, .ville{
+  padding-top: 5px;
+  padding-bottom: 1px;
 }
 
 .infos{
-    width: 450px;
-    margin: 1% auto;
+  width: 450px;
+  margin: 1% auto;
 }
 
 #page{
@@ -163,11 +245,11 @@ justify-content: center;
 }
 
 .profil{
-  width: 100%;
-  padding: 30px;
-  border: 1px solid #f1f1f1;
-  background: #fff;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0.24);
-  border-radius: 3%;
+width: 100%;
+padding: 30px;
+border: 1px solid #f1f1f1;
+background: #fff;
+box-shadow: 0 0 20px 0 rgba(0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0.24);
+border-radius: 3%;
 }
 </style>

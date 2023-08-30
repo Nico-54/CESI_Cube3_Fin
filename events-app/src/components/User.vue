@@ -8,11 +8,15 @@
     <div class="infos">
         <div class="profil">
             <h1 id="page">Coordonnées</h1>
+
+            <div v-if="validationMessage" class="validation-message">
+                {{ validationMessage }}
+            </div>
             
             <div class="name">
                 <h2>Nom :</h2>
                 <!--<span>Smile</span>-->
-                <ul>{{ userInfo.firstName }}</ul>
+                <ul><input type="text" readonly v-model="userInfo.firstName"></ul>
             </div>
 
             <hr>
@@ -37,14 +41,6 @@
                 <h2>Adresse :</h2>
                 <!--<span>12 rue de la Tour</span>-->
                 <input type="text" readonly v-model="userInfo.companyAddress">
-            </div>
-
-            <hr>
-
-            <div class="cp">
-                <h2>Code Postal :</h2>
-                <!--<span>54000</span>-->
-                <input type="text" readonly v-model="userInfo.companyPostCode">
             </div>
 
             <hr>
@@ -89,9 +85,15 @@ export default {
         companyName: '', 
         companyAddress: '', 
         companyCity: '', 
-        companyPostCode: ''
+        companyPostCode: '',
+        validationMessage: '',
       }
     };
+  },
+  computed: {
+    validationMessage() {
+      return store.state.validationMessage;
+    },
   },
   mounted() {
     // Récupérez le jeton d'authentification depuis le cookie
@@ -116,10 +118,21 @@ export default {
             }
           }
         );
+        const res_comp = await axios.get(
+          'http://localhost:3000/companies/me',
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`
+            }
+          }
+        );
 
         if (response.status === 200) {
           this.userInfo = response.data.user;
           this.userInfo.companyName = response.data.companyName || '';
+          this.userInfo.companyAddress = res_comp.data.companyAddress || '54';
+          this.userInfo.companyCity = res_comp.data.companyCity || '68';
+          this.userInfo.companyPostCode = res_comp.data.companyPostCode || '87';
         } else {
           console.error('Erreur lors de la récupération des données de l\'utilisateur');
         }
@@ -181,7 +194,7 @@ a{
   color: whitesmoke;
 }
 
-.societe, .mail, .adressepostale, .cp, .ville{
+.societe, .mail, .adressepostale, .ville{
     padding-top: 10px;
     padding-bottom: 30px;
 }
@@ -206,5 +219,10 @@ justify-content: center;
   background: #fff;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0.24);
   border-radius: 3%;
+}
+
+.validation-message{
+  text-align: center;
+  color:green;
 }
 </style>

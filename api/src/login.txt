@@ -1,0 +1,34 @@
+    "firstName" : "Max",
+    "lastName" : "Verstappen",
+    "email": "maxmaxmax@test.com",
+    "pwd": "123456789"
+
+
+    "firstName" : "Fernando",
+    "lastName" : "Alonso",
+    "email": "Fernand@test.com",
+    "pwd": "123456789"
+
+
+     "firstName" : "Sebastian",
+    "lastName" : "Vettel",
+    "email": "sebvet@test.com",
+    "pwd": "123456789"
+
+
+    "firstName" : "Lewis",
+    "lastName" : "Hamilton",
+    "email": "LewisH@test.com",
+    "pwd": "123456789"
+
+
+    "firstName" : "Charles",
+    "lastName" : "Leclerc",
+    "email": "CharlesL@test.com",
+    "pwd": "123456789"
+
+
+    "firstName" : "Pierre",
+    "lastName" : "Gasly",
+    "email": "PierreG@test.com",
+    "pwd": "123456789"

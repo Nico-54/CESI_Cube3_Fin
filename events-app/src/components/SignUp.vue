@@ -50,9 +50,14 @@
                 <input placeholder="Entreprise" type="text" v-model="entreprise"/>
             </div>
             
-            <!--<input type="checkbox" name="cgv" id="cgv">
-            <label for="cgv" class="cgv">En cochant cette case, vous concentez à nos CGV et nos CGU</label>
-  -->
+            <input type="checkbox" name="cgv" id="cgv">
+            <label for="cgv" class="cgv" required>En cochant cette case, vous consentez à nos CGV et nos CGU</label>
+
+            <br><br>
+
+            <input type="checkbox" name="cookie" id="cookie">
+            <label for="cookie" class="cookie" required>En cochant cette case, vous consentez à l'utilisation de cookie</label>
+
             <input type="submit" value="Inscription" v-on:click="signUp">
 <br><br>
             <span style="color:red; font-size: small;">{{ error }}</span>
@@ -135,7 +140,6 @@ export default{
 
         if(result.status==201){
           this.$router.push({name:'connexion'})
-          //localStorage.setItem("user-info", JSON.stringify(result.data))
         } else {
           this.error = "Erreur d'inscription.";
         }
