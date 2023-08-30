@@ -1,0 +1,42 @@
+name: my_perform
+description: Project Flutter MyPerform pour CESI by Pierre
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: '>=3.0.6 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  vibration: ^1.8.1                       #S'occupe de lancer une vibration   (/!\ Bientot obsolète /!\)
+  auto_size_text_field: ^2.2.1            #S'occupe d'ajuster la hauter des text_field
+  connectivity_plus: ^4.0.2               #S'occupe de tester l'"Internet-Connexion"
+  external_path: ^1.0.3                   #S'occupe de gérer les chemins d'accès local
+  permission_handler: ^10.4.3             #S'occupe de la permissions WRITE
+  syncfusion_flutter_pdfviewer: ^22.2.8   #S'occupe d'afficher le PDF
+  url_launcher: ^6.1.12                   #S'occupe de lancer les liens externe
+  dio: ^5.3.2                             #S'occupe de télécharger la facture
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  assets:
+    - assets/images/ic_launcher.png       #Principal Icon Image
+    - assets/images/linkedin.png          #Linkedin Icon Image
+    - assets/images/triste.png            #Oeuf triste Image
+    - assets/images/validate.png          #Validate Image
+    - assets/images/error.png             #Error Image
+    - assets/bdd.json                     #Liaison BDD local en JSON
+    - assets/fonts/Raleway.ttf            #Chemin vers votre fichier de police
+    - assets/fonts/Raleway-Bold.ttf       #Chemin vers votre fichier de police
+  fonts:
+    - family: Raleway                     #Nom de famille de la police principal
+      fonts:                              #Localisation des fonts utilisées
+        - asset: assets/fonts/Raleway.ttf       # Chemin relatif depuis le répertoire "fonts"
+        - asset: assets/fonts/Raleway-Bold.ttf  # Chemin relatif depuis le répertoire "fonts"
+
+  uses-material-design: true

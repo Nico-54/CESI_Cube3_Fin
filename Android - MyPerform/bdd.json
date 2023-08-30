@@ -1,0 +1,72 @@
+{
+  "users": [
+    {
+      "email": "spreder.pierre@gmail.com",
+      "password": "valdnqnt",
+      "lastName": "spreder",
+      "firstName": "Pierre",
+      "companyName": "CESI",
+      "adresseComplete": "3 Rue du Bois de la Champelle, 54500 Vandœuvre-lès-Nancy",
+      "nameFormule": "Excellence",
+      "descriptionFormule": "",
+      "htPrice": "200,00€",
+      "ttcPrice": "240,00€",
+      "renewal": true,
+      "dateInvoice": "15/09",
+      "startDate": "01/01/2023",
+      "endDate": "31/12/2023",
+      "linkPDF": "https://www.tutorialspoint.com/flutter/flutter_tutorial.pdf"
+    },
+    {
+      "email": "doudou@cherie.com",
+      "password": "aaaaaaaa",
+      "lastName": "Mme Rachel",
+      "firstName": "Mon \u2661",
+      "companyName": "CESI",
+      "adresseComplete": "L'adresse de mon \u2661",
+      "nameFormule": "Primo",
+      "descriptionFormule": "",
+      "htPrice": "50,00€",
+      "ttcPrice": "60,00€",
+      "renewal": true,
+      "dateInvoice": "25/12",
+      "startDate": "01/01/2023",
+      "endDate": "31/01/2023",
+      "linkPDF": "https://static.fnac-static.com/multimedia/editorial/pdf/9791028512378.pdf"
+    },
+    {
+      "email": "utilisateur01@myperform.com",
+      "password": "azerty01",
+      "lastName": "Spreder",
+      "firstName": "Pierre",
+      "companyName": "CESI",
+      "adresseComplete": "3 Rue du Bois de la Champelle, 54500 Vandœuvre-lès-Nancy",
+      "nameFormule": "Excellence",
+      "descriptionFormule": "",
+      "htPrice": "200,00€",
+      "ttcPrice": "240,00€",
+      "renewal": true,
+      "dateInvoice": "15/09",
+      "startDate": "01/01/2023",
+      "endDate": "31/12/2023",
+      "linkPDF": "https://www.tutorialspoint.com/flutter/flutter_tutorial.pdf"
+    },
+    {
+      "email": "utilisateur02@myperform.com",
+      "password": "azerty02",
+      "lastName": "Loritz",
+      "firstName": "Nicolas",
+      "companyName": "CESI",
+      "adresseComplete": "3 Rue du Bois de la Champelle, 54500 Vandœuvre-lès-Nancy",
+      "nameFormule": "Performance",
+      "descriptionFormule": "",
+      "htPrice": "120,00€",
+      "ttcPrice": "144,00€",
+      "renewal": false,
+      "dateInvoice": "",
+      "startDate": "01/01/2023",
+      "endDate": "31/12/2023",
+      "linkPDF": ""
+    }
+  ]
+}
