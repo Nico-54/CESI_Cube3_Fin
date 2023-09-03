@@ -80,7 +80,6 @@ export default{
 <style lang="scss">
     
 .contenu{
-    width: 850px;
     margin: 10% auto;
 }
 .tableau{
@@ -89,7 +88,7 @@ export default{
 }
 
 tbody td {
-    padding: 5px 5px;
+    padding: 5px 102px;
 }
 
 table,
