@@ -12,43 +12,43 @@
                 <label>Prenom</label>
                 <input placeholder="Prenom" type="text" v-model="prenom" />
             </div>
-  
-            <div class="inputbox">    
-                <label>Mot de passe</label>
-                <input placeholder="Mot de passe" type="password" v-model="password" minlength="8"/>
-            </div>
-            <div class="inputbox">    
-                <label>Mot de passe - verif</label>
-                <input placeholder="Mot de passe" type="password" v-model="passwordVerif" minlength="8"/>
-            </div>
 
-            <div class="inputbox">    
-                <label>Adresse Postal</label>
-                <input placeholder="Adresse" type="text" v-model="adresse"/>
-            </div>
-            <div class="inputbox">    
-                <label>Code Postal</label>
-                <input placeholder="Code Postal" type="text" v-model="postal"/>
-            </div>
-            <div class="inputbox">    
-                <label>Ville</label>
-                <input placeholder="Ville" type="text" v-model="ville"/>
-            </div>
-
-            <!--<div class="inputbox">    
-                <label>Téléphone</label>
-                <input placeholder="Téléphone" type="text" v-model="telephone" maxlength="10"/>
-            </div>-->
-  
             <div class="inputbox">    
                 <label>Adresse Mail</label>
                 <input placeholder="Email" type="email" v-model="email"/>
             </div>
   
             <div class="inputbox">    
+                <label>Mot de passe</label>
+                <input placeholder="Mot de passe" type="password" v-model="password" minlength="8"/>
+            </div>
+
+            <div class="inputbox">    
+                <label>Mot de passe - verif</label>
+                <input placeholder="Mot de passe" type="password" v-model="passwordVerif" minlength="8"/>
+            </div>
+
+            <div class="inputbox">    
                 <label>Entreprise</label>
                 <input placeholder="Entreprise" type="text" v-model="entreprise"/>
             </div>
+
+            <div class="inputbox">    
+                <label>Adresse Postal</label>
+                <input placeholder="Adresse" type="text" v-model="adresse"/>
+            </div>
+
+            <div class="inputbox">    
+                <label>Code Postal</label>
+                <input placeholder="Code Postal" type="text" v-model="postal"/>
+            </div>
+
+            <div class="inputbox">    
+                <label>Ville</label>
+                <input placeholder="Ville" type="text" v-model="ville"/>
+            </div>
+  
+            
             
             <input type="checkbox" name="cgv" id="cgv">
             <label for="cgv" class="cgv" required>En cochant cette case, vous consentez à nos CGV et nos CGU</label>

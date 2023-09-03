@@ -82,13 +82,14 @@ export default{
       }
     };
   },
-        logout() {
+  methods:{
+    logout() {
       // Appelez la mutation de déconnexion pour effacer les données d'utilisateur et le jeton
       store.commit('clearUserData');
 
       // Redirigez l'utilisateur vers la page de connexion ou une autre page appropriée
       router.push('/connexion'); // Remplacez '/login' par l'URL de votre page de connexion
-    },
+    }},
 };
 
 document.addEventListener("DOMContentLoaded", function() {
