@@ -4,14 +4,11 @@ const router = new express.Router();
 const authentification = require('../middlewares/authentification');
 
 
+
 // CREATE SUBSCRIPTION FOR CURRENT USER'S COMPANY
 router.post('/subscriptions', authentification, async (req, res) => {
     try {
-        const companyId = req.user.idCompany;
-
-        if (!companyId) {
-            return res.status(404).send("Aucune entreprise associée à l'utilisateur.");
-        }
+        const companyId = req.body.idCompany;
 
         // check subscription already exist for current company
         const existingSubscription = await Subscription.findOne({ idCompany: companyId });
@@ -26,7 +23,7 @@ router.post('/subscriptions', authentification, async (req, res) => {
 
         const subscription = new Subscription({
             idCompany: companyId,
-            idPrice: req.body.idPrice,
+            idFormula: req.body.idFormula,
             renewal: req.body.renewal,
             startDate: startDate,
             endDate: endDate,
@@ -43,8 +40,11 @@ router.post('/subscriptions', authentification, async (req, res) => {
 });
 
 
+
+
+
 // READ SUBSCRIPTION BY CURRENT USER'S COMPANY
-router.get('/subscriptions', authentification, async (req, res) => {
+router.get('/subscription/me', authentification, async (req, res) => {
     try {
         const companyId = req.user.idCompany;
 
@@ -59,6 +59,40 @@ router.get('/subscriptions', authentification, async (req, res) => {
         }
 
         res.send(subscription);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+});
+
+
+// READ SUBSCRIPTION BY ID
+router.get('/subscription/id', authentification, async (req, res) => {
+    try {
+        const companyId = req.body.idCompany;
+
+        const subscription = await Subscription.findOne({ idCompany: companyId });
+
+        if (!subscription) {
+            return res.status(404).send("Aucune souscription trouvée pour cette ID.");
+        }
+
+        res.send(subscription);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+});
+
+
+// READ ALL SUBSCRIPTION BY SUPER_ADMIN
+router.get('/subscription/all', authentification, async (req, res) => {
+    try {
+        if (req.user.role !== 'super_admin') {
+            return res.status(403).send("Accès interdit - Réservé aux super admins");
+        }
+
+        const subscriptions = await Subscription.find();
+
+        res.send(subscriptions);
     } catch (e) {
         res.status(500).send(e);
     }

@@ -1,3 +1,6 @@
+// creation des tables de paramètrages
+
+
 const { connectDb } = require('./src/services/mongoose');
 const mongoose = require('mongoose');
 const Formula = require('./src/models/formula');

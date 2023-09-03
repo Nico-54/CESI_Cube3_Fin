@@ -3,8 +3,10 @@ const Company = require('../models/company');
 const router = new express.Router();
 const authentification = require('../middlewares/authentification');
 
+
+
 // CREATE COMPANY
-router.post('/companies', async (req, res) => {
+router.post('/companies', authentification, async (req, res) => {
     const company = new Company(req.body);
     company.registrationDate = new Date();
     try {
@@ -17,7 +19,7 @@ router.post('/companies', async (req, res) => {
 
 
 // READ ALL COMPANY BY SUPER_ADMIN
-router.get('/companies', authentification, async (req, res) => {
+router.get('/company/all', authentification, async (req, res) => {
     try {
         if (req.user.role !== 'super_admin') {
             return res.status(403).send("Accès interdit - Réservé aux super admins");
@@ -33,7 +35,7 @@ router.get('/companies', authentification, async (req, res) => {
 
 
 //READ COMPANY BY CURRENT USER
-router.get('/companies/me', authentification, async (req, res) => {
+router.get('/company/me', authentification, async (req, res) => {
     try {
         const companyId = req.user.idCompany;
 
@@ -52,9 +54,27 @@ router.get('/companies/me', authentification, async (req, res) => {
     }
 });
 
+//READ COMPANY BY ID
+router.get('/company/id', authentification, async (req, res) => {
+    try {
+        const companyId = req.body.companyId;
+
+        const company = await Company.findById(companyId); 
+
+        if (!company) {
+            return res.status(404).send("Aucune entreprise trouvée pour cet ID.");
+        }
+
+        res.send(company);
+    } catch (e) {
+        res.status(500).send(e);
+    }
+});
+
+
 
 //UPDATE COMPANY BY CURRENT USER'S COMPANY
-router.patch('/companies', authentification, async (req, res) => {
+router.patch('/company/me', authentification, async (req, res) => {
     try {
         const companyId = req.user.idCompany;
 

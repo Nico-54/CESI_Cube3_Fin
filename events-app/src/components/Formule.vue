@@ -10,7 +10,7 @@
 
     <label for="form">Formule</label>
     <select id="form" name="form">
-        <option value="">--Formule--</option>
+        <option value="">Aucune</option>
         <option value="duer">DUER</option>
         <option value="primo">Primo</option>
         <option value="amelioration">Amélioration</option>
@@ -61,58 +61,27 @@
     <div class="check">
         <input type="checkbox" name="abo" id="abo" checked>Reconduite tacite de l'abonnement. A décocher pour le désactiver
     </div>
+
+    <div class="sub">
+        <input type="submit" name="validation" id="validation" value="Confirmer" v-on:click="subscription">
+    </div>
     
 </template>
 
 <script>
-import store from '@/store';
+
 import router from '@/router';
-import axios from 'axios';
-import Cookies from 'js-cookie'; // Importez le module js-cookie
+import store from '@/store';
 
 export default{
     name: 'FormuleData',
     data() {
     return {
       formulaInfo: {
- 
+        selectedModule:""
       }
     };
   },
-    mounted() {
-    // Récupérez le jeton d'authentification depuis le cookie
-    const authToken = Cookies.get('authToken');
-    
-    if (authToken) {
-      // Utilisez le jeton d'authentification pour récupérer les données de l'utilisateur
-      this.fetchFormulaData(authToken);
-    } else {
-      console.error('Aucun jeton d\'authentification trouvé.');
-    }
-  },
-    methods: {
-        async fetchFormulaData() {
-      try {
-        const authToken = store.state.authToken;
-        const response = await axios.get(
-          'http://localhost:3000/formulas',
-          {
-            headers: {
-              Authorization: `Bearer ${authToken}`
-            }
-          }
-        );
-
-        if (response.status === 200) {
-          this.formulaInfo = response.data.formulas;
-          console.log(this.formulaInfo);
-        } else {
-          console.error('Erreur lors de la récupération des données des formules');
-        }
-      } catch (error) {
-        console.error('Une erreur s\'est produite : ', error);
-      }
-    },
         logout() {
       // Appelez la mutation de déconnexion pour effacer les données d'utilisateur et le jeton
       store.commit('clearUserData');
@@ -120,7 +89,6 @@ export default{
       // Redirigez l'utilisateur vers la page de connexion ou une autre page appropriée
       router.push('/connexion'); // Remplacez '/login' par l'URL de votre page de connexion
     },
-    }
 };
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -134,7 +102,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 var echeanceCheckbox = document.getElementById('echeance');
                 var accidentCheckbox = document.getElementById('accident');
                 var risqueCheckbox = document.getElementById('risque');
-                //var anomalieCheckbox = document.getElementById('anomalie');
+                var anomalieCheckbox = document.getElementById('anomalie');
+                var rpsCheckbox = document.getElementById('rps');
                 var aboCheckbox = document.getElementById('abo');
                 
 
@@ -148,7 +117,9 @@ document.addEventListener("DOMContentLoaded", function() {
                             break;
 
                         case 'primo':
-
+                          if (actionCheckbox) {
+                            actionCheckbox.disabled = true;
+                          }
                             console.log(selectedOption);
                             break;
 
@@ -164,9 +135,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
                             actionCheckbox.checked = true;
                             auditCheckbox.checked = true;
-                            signalementCheckbox.checked = true;
+                            signalementCheckbox.checked = true;                            
+                            
+                            //les autres sont indisponibles
+                            accidentCheckbox.disabled = true;
+                            echeanceCheckbox.disabled = true;
+                            rpsCheckbox.disabled = true;
 
-
+                            //vérification si Anomalie OU Risque est coché
+                            if(risqueCheckbox.checked === true){
+                              anomalieCheckbox.disabled = true;
+                            } else if (anomalieCheckbox.checked === true){
+                              risqueCheckbox.disabled = true;
+                            } else {
+                              anomalieCheckbox.disabled = false;
+                              risqueCheckbox.disabled = false;
+                            }
                             console.log(selectedOption);
                             break;
 
@@ -177,6 +161,11 @@ document.addEventListener("DOMContentLoaded", function() {
                             signalementCheckbox.checked = true;
                             accidentCheckbox.checked = true;
                             echeanceCheckbox.checked = true;
+
+                            //les autres sont indisponibles
+                            auditCheckbox.disabled = true;
+                            anomalieCheckbox.disabled = true;
+                            rpsCheckbox.disabled = true;
 
                             console.log(selectedOption);
                             break;
@@ -205,6 +194,8 @@ document.addEventListener("DOMContentLoaded", function() {
             });
 </script>
     
+
+
 <style lang="scss">
 
 .mods{

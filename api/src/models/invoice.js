@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const validator = require('validator');
 
 const invoiceSchema = 
 new Schema({idCompany: { type: Schema.Types.ObjectId, ref: 'Company' },

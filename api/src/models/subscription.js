@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const subscriptionSchema = 
-new Schema({idCompany: { type: Schema.Types.ObjectId, ref: 'Company' },
+new Schema({idCompany: { type: Schema.Types.ObjectId, ref: 'Company', unique:true },
             idFormula:{ type: Schema.Types.ObjectId, ref: 'Formula' },
             renewal: Boolean,
             startDate: Date,

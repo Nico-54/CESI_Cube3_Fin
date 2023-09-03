@@ -24,7 +24,7 @@
     <div class="facture">
       <h1>Dernières Factures</h1>
       <div class="doc">
-        <span><a href="../assets/pdf/TP_ALGO_OIE_SCRABBLE.pdf" target="_blank">facture.pdf</a></span>
+        <span><a @click="telechargerPDF" class="pdf">facture.pdf</a></span>
         
         <br>
         <span>facture.csv</span>
@@ -57,9 +57,23 @@ export default{
       store.commit('clearUserData');
 
       // Redirigez l'utilisateur vers la page de connexion ou une autre page appropriée
-      router.push('/connexion'); // Remplacez '/login' par l'URL de votre page de connexion
+      router.push('/connexion');
     },
-    } 
+    telechargerPDF() {
+      // Construire le chemin vers le fichier PDF
+      const cheminPDF = require('../assets/pdf/architecture.png');
+
+      // Créer un lien invisible vers le fichier PDF
+      const lienDeTelechargement = document.createElement('a');
+      lienDeTelechargement.href = cheminPDF;
+
+      // Spécifier le nom du fichier lors du téléchargement
+      lienDeTelechargement.download = 'facture.pdf';
+
+      // Simuler un clic sur le lien pour déclencher le téléchargement
+      lienDeTelechargement.click();
+    },
+  }
 }
 </script>
   
@@ -128,6 +142,11 @@ nav {
   padding: 10px 0;
   width: 600px;
   border-radius: 2%;
+}
+.pdf{
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
 }
 
 .doc{

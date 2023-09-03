@@ -3,8 +3,6 @@ const { Schema } = mongoose;
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require ('jsonwebtoken');
-const Company = require('../models/company');
-
 
 
 const userSchema = 

@@ -113,7 +113,7 @@ methods: {
         }
       );
       const res_comp = await axios.get(
-        'http://localhost:3000/companies/me',
+        'http://localhost:3000/company/me',
         {
           headers: {
             Authorization: `Bearer ${authToken}`
