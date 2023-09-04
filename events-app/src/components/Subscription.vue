@@ -16,7 +16,7 @@
       <div class="about2">
         <div class="bord2">
           <h1>Prix :</h1>
-          <span>X €</span>
+          <span>25 €</span>
         </div>
       </div>
     </div>

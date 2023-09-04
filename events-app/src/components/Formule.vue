@@ -177,6 +177,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             checkboxes.forEach(function(checkbox) {
                                 if (checkbox !== aboCheckbox) {
                                     checkbox.checked = true;
+                                    checkbox.disabled = false;
                                 }
                             });
                             break;
@@ -187,6 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             checkboxes.forEach(function(checkbox) {
                                 if (checkbox !== aboCheckbox) {
                                     checkbox.checked = false;
+                                    checkbox.disabled = false;
                                 }
                                 });
                             break;

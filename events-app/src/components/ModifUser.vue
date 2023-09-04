@@ -9,60 +9,72 @@
       <div class="profil">
           <h1 id="page">Modifications</h1>
           
-          <div class="name">
-              <h2>Nom :</h2>
-              <!--<span>Smile</span>-->
-              <ul><input type="text" v-model="userInfo.firstName"></ul>
-          </div>
+          <div class="datas-container">
+            <div class="datas">
 
-          <hr>
+              <div class="name">
+                  <h2>Nom :</h2>
+                  <!--<span>Smile</span>-->
+                  <ul><input type="text" v-model="userInfo.firstName"></ul>
+              </div>
 
-          <div class="prenom">
-              <h2>Prenom :</h2>
-              <!--<span>Smile</span>-->
-              <input type="text" v-model="userInfo.lastName">
-          </div>
+              <hr>
 
-          <hr>
+              <div class="prenom">
+                  <h2>Prenom :</h2>
+                  <!--<span>Smile</span>-->
+                  <input type="text" v-model="userInfo.lastName">
+              </div>
 
-          <div class="societe">
-              <h2>Société :</h2>
-              <!--<span>Smile</span>-->
-              <input type="text" v-model="userInfo.companyName">
-          </div>
-          
-          <hr>
+              <hr>
 
-          <div class="adressepostale">
-              <h2>Adresse :</h2>
-              <!--<span>12 rue de la Tour</span>-->
-              <input type="text" v-model="userInfo.companyAddress">
-          </div>
+              <div class="mail">
+                  <h2>Adresse Email :</h2>
+                  <input type="text" v-model="userInfo.email">
+              </div>
 
-          <hr>
+            </div>
 
-          <div class="ville">
-              <h2>Ville :</h2>
-              <!--<span>Nancy</span>-->
-              <input type="text" v-model="userInfo.companyCity">
-          </div>
 
-          <hr>
-          
-          <div class="mail">
-              <h2>Adresse Email :</h2>
-              <input type="text" v-model="userInfo.email">
-          </div>
+          <div class="datas">
 
-          <input class="modif" type="submit" value="Valider" v-on:click="modification">
+            <div class="societe">
+                <h2>Société :</h2>
+                <!--<span>Smile</span>-->
+                <input type="text" v-model="userInfo.companyName">
+            </div>
+
+            <hr>
+
+            <div class="adressepostale">
+                <h2>Adresse :</h2>
+                <!--<span>12 rue de la Tour</span>-->
+                <input type="text" v-model="userInfo.companyAddress">
+            </div>
+
+            <hr>
+
+            <div class="ville">
+                <h2>Ville :</h2>
+                <!--<span>Nancy</span>-->
+                <input type="text" v-model="userInfo.companyCity">
+            </div>
+
+          </div>  
+        </div>
+
+        <hr id="separate">
+
+        <div class="button">
+          <input class="validation" type="submit" value="Valider" v-on:click="modification">
 
           <a href="/profil">
-              <div class="modif">
+              <div class="return">
                   Retour
               </div>
           </a>
+        </div>
 
-      
       </div>
   </div>
 </template>
@@ -201,45 +213,46 @@ a {
 }
 
 hr{
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+}
+
+#separate{
+  margin: 30px;
 }
 
 h2{
   margin-bottom: 15px;
 }
 
-.modif{
-margin-top: 20px;
-//margin-left: 46%;
-//width: 160px;
+.return{
+margin-top: 30px;
+width: 50%;
 height: 42px;
-background: rgba(225,100,20,1.0);
+background: rgba(222,222,222,1.0);
 border-radius: 5px;
 display: flex;
 justify-content: center;
 align-content: center;
 flex-wrap: wrap;
 font-size: larger;
+margin-left: 25%;
 }
-a{
+.button a{
 text-decoration: none;
-color: whitesmoke;
+color: black;
 }
 
-.societe, .mail, .adressepostale, .ville{
-  padding-top: 5px;
-  padding-bottom: 1px;
+.societe, .mail, .adressepostale, .ville, .prenom, .name{
+  text-align: center;
 }
 
 .infos{
-  width: 450px;
-  margin: 1% auto;
+  width: 1160px;
+  margin: 5% auto;
 }
 
 #page{
-//width: 38%;
-//margin: 0 40%;
-padding-bottom: 40px;
+padding-bottom: 60px;
 display: flex;
 justify-content: center;
 }
@@ -251,5 +264,26 @@ border: 1px solid #f1f1f1;
 background: #fff;
 box-shadow: 0 0 20px 0 rgba(0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0.24);
 border-radius: 3%;
+}
+
+.datas-container {
+  display: flex;
+  flex-direction: row; /* Les divs .datas seront placées côte à côte */
+  justify-content: space-between; /* Pour espacer les divs horizontalement */
+  align-items: center; /* Pour aligner verticalement le contenu des divs */
+  gap: 100px;
+}
+
+.datas {
+  flex: 1; /* Pour que chaque div .datas occupe une part égale de l'espace disponible */
+}
+
+input[type=text]{
+  text-align: center;
+}
+input[type=submit]{
+  width: 50%;
+  margin-left: 25%;
+  font-size: larger;
 }
 </style>

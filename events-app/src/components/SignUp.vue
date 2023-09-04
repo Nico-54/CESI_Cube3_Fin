@@ -1,13 +1,17 @@
 <template>
-    <div class="connexion">
-        <div class="oui">
-            <h1>Inscription</h1>
-  
+    <div class="inscription">
+      <div class="oui">
+
+        <h1 id="titre">Inscription</h1>
+        
+        <div class="datas-container">
+
+          <div class="datas">
             <div class="inputbox">
                 <label>Nom</label>
                 <input placeholder="Nom" type="text" v-model="name"/>
             </div>
-  
+
             <div class="inputbox">    
                 <label>Prenom</label>
                 <input placeholder="Prenom" type="text" v-model="prenom" />
@@ -17,7 +21,7 @@
                 <label>Adresse Mail</label>
                 <input placeholder="Email" type="email" v-model="email"/>
             </div>
-  
+
             <div class="inputbox">    
                 <label>Mot de passe</label>
                 <input placeholder="Mot de passe" type="password" v-model="password" minlength="8"/>
@@ -28,6 +32,9 @@
                 <input placeholder="Mot de passe" type="password" v-model="passwordVerif" minlength="8"/>
             </div>
 
+          </div>
+
+          <div class="datas">
             <div class="inputbox">    
                 <label>Entreprise</label>
                 <input placeholder="Entreprise" type="text" v-model="entreprise"/>
@@ -47,21 +54,29 @@
                 <label>Ville</label>
                 <input placeholder="Ville" type="text" v-model="ville"/>
             </div>
+
+          </div>
   
-            
-            
-            <input type="checkbox" name="cgv" id="cgv">
-            <label for="cgv" class="cgv" required>En cochant cette case, vous consentez à nos CGV et nos CGU</label>
-
-            <br><br>
-
-            <input type="checkbox" name="cookie" id="cookie">
-            <label for="cookie" class="cookie" required>En cochant cette case, vous consentez à l'utilisation de cookie</label>
-
-            <input type="submit" value="Inscription" v-on:click="signUp">
-<br><br>
-            <span style="color:red; font-size: small;">{{ error }}</span>
+        </div> 
         
+        
+        <div class="inputs">
+          <input type="checkbox" name="cgv" id="cgv">
+          <label for="cgv" class="cgv" required>En cochant cette case, vous consentez à nos CGV et nos CGU</label>
+
+          <br><br>
+
+          <input type="checkbox" name="cookie" id="cookie">
+          <label for="cookie" class="cookie" required>En cochant cette case, vous consentez à l'utilisation de cookie</label>
+
+        </div>
+
+          <input type="submit" value="Inscription" v-on:click="signUp">
+
+          <br><br>
+
+          <span style="color:red; font-size: small;">{{ error }}</span>
+
         </div>
     </div>
   </template>
@@ -148,39 +163,31 @@ export default{
         console.log(error);
       }
     }
-      /*{
-        
-        console.warn(result);
-        if(result.status==201){
-          this.$router.push({name:'connexion'})
-          localStorage.setItem("user-info", JSON.stringify(result.data))
-        }
-      }*/
     }
 }
 </script>
   
 <style lang="scss">
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  //text-align: center;
-  color: black;
+#titre{
+  margin-left: 43%;
 }
 
-.cgv{
+.inputs{
+  margin: 44px;
+  text-align: center;
+}
+
+.cgv, .cookie{
   margin-left: 10px;
 }
 
-.connexion{
-  width: 400px;
-  //width: 535px;
-  margin: 1% auto;
+.inscription{
+  width: 1300px;
+  margin: 2% auto;
 }
 
-.connexion h1{
+.inscription h1{
   width: 38%;
   margin: 0 90px;
   padding-bottom: 30px;
@@ -222,4 +229,5 @@ input[type=submit]:hover{
 .inputbox {
   padding-top: 10px;
 }
+
 </style>

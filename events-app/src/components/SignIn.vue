@@ -116,7 +116,7 @@ export default{
 .connexion{
 width: 400px;
 margin: 0 auto;
-margin-top: 5%;
+margin-top: 3%;
 }
 
 .connexion h1{
@@ -140,6 +140,7 @@ margin: 20px 0 20px;
 display: inline-block;
 border: 1px solid #ccc;
 box-sizing: border-box;
+text-align: center;
 }
 
 input[type=submit]{

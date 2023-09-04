@@ -13,56 +13,70 @@
                 {{ validationMessage }}
             </div>
             
-            <div class="name">
-                <h2>Nom :</h2>
-                <!--<span>Smile</span>-->
-                <ul><input type="text" readonly v-model="userInfo.firstName"></ul>
-            </div>
+            <div class="datas-container">
+              <div class="datas">
 
-            <hr>
-
-            <div class="prenom">
-                <h2>Prenom :</h2>
-                <!--<span>Smile</span>-->
-                <input type="text" readonly v-model="userInfo.lastName">
-            </div>
-
-            <hr>
-
-            <div class="societe">
-                <h2>Société :</h2>
-                <!--<span>Smile</span>-->
-                <input type="text" readonly v-model="userInfo.companyName">
-            </div>
-            
-            <hr>
-
-            <div class="adressepostale">
-                <h2>Adresse :</h2>
-                <!--<span>12 rue de la Tour</span>-->
-                <input type="text" readonly v-model="userInfo.companyAddress">
-            </div>
-
-            <hr>
-
-            <div class="ville">
-                <h2>Ville :</h2>
-                <!--<span>Nancy</span>-->
-                <input type="text" readonly v-model="userInfo.companyCity">
-            </div>
-
-            <hr>
-            
-            <div class="mail">
-                <h2>Adresse Email :</h2>
-                <input type="text" readonly v-model="userInfo.email">
-            </div>
-
-            <a href="/modif">
-                <div class="modif">
-                    Modification
+                <div class="name">
+                    <h2>Nom :</h2>
+                    <!--<span>Smile</span>-->
+                    <ul><input type="text" readonly v-model="userInfo.firstName"></ul>
                 </div>
-            </a>
+
+                <hr>
+
+                <div class="prenom">
+                    <h2>Prenom :</h2>
+                    <!--<span>Smile</span>-->
+                    <input type="text" readonly v-model="userInfo.lastName">
+                </div>
+
+                <hr>
+
+                <div class="mail">
+                    <h2>Adresse Email :</h2>
+                    <input type="text" readonly v-model="userInfo.email">
+                </div>
+
+              </div>
+
+
+              <div class="datas">
+              
+                <div class="societe">
+                    <h2>Société :</h2>
+                    <!--<span>Smile</span>-->
+                    <input type="text" readonly v-model="userInfo.companyName">
+                </div>
+
+                <hr>
+              
+                <div class="adressepostale">
+                    <h2>Adresse :</h2>
+                    <!--<span>12 rue de la Tour</span>-->
+                    <input type="text" readonly v-model="userInfo.companyAddress">
+                </div>
+              
+                <hr>
+              
+                <div class="ville">
+                    <h2>Ville :</h2>
+                    <!--<span>Nancy</span>-->
+                    <input type="text" readonly v-model="userInfo.companyCity">
+                </div>
+              
+              </div>
+          
+            </div>
+
+            <hr id="separate">
+
+            <div class="button-modif">
+              <a href="/modif">
+                  <div class="modif">
+                      Modification
+                  </div>
+              </a>
+            </div>
 
         </div>
     </div>
@@ -150,6 +164,7 @@ export default {
 };
 </script>
     
+
 <style lang="scss">
 
 nav {
@@ -170,6 +185,9 @@ nav {
 hr{
     margin-bottom: 30px;
 }
+#separate{
+  margin: 30px;
+}
 
 h2{
     margin-bottom: 15px;
@@ -177,9 +195,9 @@ h2{
 
 .modif{
   margin-top: 50px;
-  //margin-left: 46%;
-  //width: 160px;
   height: 42px;
+  width: 50%;
+  margin-left: 25%;
   background: rgba(225,100,20,1.0);
   border-radius: 5px;
   display: flex;
@@ -188,25 +206,27 @@ h2{
   flex-wrap: wrap;
   font-size: larger;
 }
-a{
+.modif:hover {
+    background-color: whitesmoke;
+    color: black;
+    border: 1px solid rgb(225, 100, 20);
+}
+.button-modif a{
   text-decoration: none;
   color: whitesmoke;
 }
 
-.societe, .mail, .adressepostale, .ville{
-    padding-top: 10px;
-    padding-bottom: 30px;
+.societe, .mail, .adressepostale, .ville, .prenom, .name{
+  text-align: center;
 }
 
 .infos{
-    width: 450px;
-    margin: 1% auto;
+    width: 1160px;
+    margin: 5% auto;
 }
 
 #page{
-//width: 38%;
-//margin: 0 40%;
-padding-bottom: 40px;
+padding-bottom: 60px;
 display: flex;
 justify-content: center;
 }
@@ -224,4 +244,21 @@ justify-content: center;
   text-align: center;
   color:green;
 }
+
+.datas-container {
+  display: flex;
+  flex-direction: row; /* Les divs .datas seront placées côte à côte */
+  justify-content: space-between; /* Pour espacer les divs horizontalement */
+  align-items: center; /* Pour aligner verticalement le contenu des divs */
+  gap: 100px;
+}
+
+.datas {
+  flex: 1; /* Pour que chaque div .datas occupe une part égale de l'espace disponible */
+}
+
+input[type=text]{
+  text-align: center;
+}
+
 </style>
