@@ -175,7 +175,7 @@ router.patch('/users/id', authentification, async (req, res) => {
 });
 
 
-// DELETE USER
+// DELETE USER ID by SUPER_ADMIN
 router.post('/users/id', authentification, async(req, res) => {  
     try {
         const userId = req.body.userId;

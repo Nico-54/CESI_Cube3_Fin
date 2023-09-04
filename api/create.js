@@ -1,13 +1,14 @@
-// creation des tables de paramètrages
+//CREATION OF SETTING COLLECTIONS
 
+hnngf
+bnvbn
 
 const { connectDb } = require('./src/services/mongoose');
 const mongoose = require('mongoose');
 const Formula = require('./src/models/formula');
 const User = require('./src/models/user');
 const Module = require('./src/models/module');
-
-
+require('dotenv').config();
 
 async function createFormulas() {
   try {
@@ -18,7 +19,7 @@ async function createFormulas() {
       firstName: 'Super',
       lastName: 'Admin',
       email: "superadmin@test.com",
-      pwd: 'Azerty01',
+      pwd: process.env.ADMIN_PASSWORD,
       companyName: 'Cogelis',
       role: 'super_admin',
     });
@@ -29,20 +30,21 @@ async function createFormulas() {
 
 
     // Create Modules
-   const modules = [
-      {moduleName:'Anomalie',type:'déclencheur'}, 
-      {moduleName:'Risque',type:'déclencheur'}, 
-      {moduleName:'Accident',type:'déclencheur'}, 
-      {moduleName:'Echéance',type:'déclencheur'}, 
-      {moduleName:'Audit',type:'déclencheur'}, 
-      {moduleName:'Signalement',type:'déclencheur'}, 
-      {moduleName:'RPS',type:'déclencheur'}, 
-      {moduleName:'Action',type:'action'}
-    ];
+    const modules = [
+        {moduleName:'Document unique'},
+        {moduleName:'Anomalie',type:'déclencheur'}, 
+        {moduleName:'Risque',type:'déclencheur'}, 
+        {moduleName:'Accident',type:'déclencheur'}, 
+        {moduleName:'Echéance',type:'déclencheur'}, 
+        {moduleName:'Audit',type:'déclencheur'}, 
+        {moduleName:'Signalement',type:'déclencheur'}, 
+        {moduleName:'RPS',type:'déclencheur'}, 
+        {moduleName:'Action',type:'action'}
+      ];
 
+      await Module.insertMany(modules);
 
-
-
+      console.log('Modules crées avec succès.');
 
     // Create Formulas
     const formulas = [
@@ -85,10 +87,6 @@ async function createFormulas() {
       },
     ];
 
-    await Module.insertMany(modules);
-
-    console.log('Modules crées avec succès.');
-
     await Formula.insertMany(formulas);
 
     console.log('Formules crées avec succès.');
@@ -98,5 +96,6 @@ async function createFormulas() {
     console.error('Erreur lors de la création :', error);
   }
 }
+
 
 createFormulas();

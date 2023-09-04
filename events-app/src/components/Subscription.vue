@@ -22,37 +22,46 @@
     </div>
   
     <div class="facture">
-      <h1>Dernières Factures</h1>
-      <div class="doc">
-        <span><a @click="telechargerPDF" class="pdf">facture.pdf</a></span>
-        
-        <br>
-        <span>facture.csv</span>
-      </div>
-  
-      <div class="buttons">
 
+    <h1>Dernières Factures</h1>
+
+    <div class="doc">
+
+      <span><a @click="telechargerPDF" class="pdf" href="/pdf/TP_JEU_DE_LOIE_PROPRE.pdf">facture.pdf</a></span>
+
+      <br>
+      
+      <span>facture.csv</span>
+    
+    </div>
+    
+    <div class="buttons">
+    
       <div class="all">
+    
         <a href="/facture">Toutes les factures</a>
+    
       </div>
-
+    
       <div class="formule">
+    
         <a href="/formule">Modifier ma formule</a>
+    
       </div>
-
-    </div>
+    
     </div>
   
+  </div>
 </template>
 
 <script>
 import store from '@/store';
 import router from '@/router';
 
-export default{
-    name: 'SubsInfos',
-    methods: {
-        logout() {
+export default {
+  name: 'SubsInfos',
+  methods: {
+    logout() {
       // Appelez la mutation de déconnexion pour effacer les données d'utilisateur et le jeton
       store.commit('clearUserData');
 
@@ -61,7 +70,7 @@ export default{
     },
     telechargerPDF() {
       // Construire le chemin vers le fichier PDF
-      const cheminPDF = require('../assets/pdf/architecture.png');
+      const cheminPDF = '/pdf/TP_JEU_DE_LOIE_PROPRE.pdf'; // Utilisez @ pour spécifier le chemin correct
 
       // Créer un lien invisible vers le fichier PDF
       const lienDeTelechargement = document.createElement('a');
@@ -73,9 +82,10 @@ export default{
       // Simuler un clic sur le lien pour déclencher le téléchargement
       lienDeTelechargement.click();
     },
-  }
-}
+  },
+};
 </script>
+
   
 <style lang="scss">
 $backTest: whitesmoke;
@@ -136,7 +146,7 @@ nav {
 }
 
 .facture{
-  margin: 150px 700px;
+  margin: 135px 700px;
   background: $backTest;
   text-align: center;
   padding: 10px 0;

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require ('jsonwebtoken');
+const { Schema } = mongoose;
 
 
 const userSchema = 
@@ -31,7 +31,7 @@ new Schema({idCompany: { type: Schema.Types.ObjectId, ref: 'Company' },
 
 // Function generateAuthTokenAndSaveUser - Manage Token
 userSchema.methods.generateAuthTokenAndSaveUser = async function () {
-  const authToken = jwt.sign({ _id: this._id.toString() }, 'secret', { expiresIn: '60m' });
+  const authToken = jwt.sign({ _id: this._id.toString() }, 'secret', { expiresIn: '30m' });
   // save token in BDD
   this.authTokens.push({ authToken });
   await this.save();
@@ -39,7 +39,7 @@ userSchema.methods.generateAuthTokenAndSaveUser = async function () {
 }
 
 
-// Function FindUser - check pwd (statics : add a function to the model)
+// Function FindUser - check pwd
 userSchema.statics.findUser = async(email, pwd) => {
   const user = await User.findOne({email});
   if (!user) throw new Error('erreur de connection')

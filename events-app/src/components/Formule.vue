@@ -226,4 +226,9 @@ document.addEventListener("DOMContentLoaded", function() {
     margin-left: 10px;
 }
 
+.sub{
+    width: 50%;
+    margin-left: 20%;
+}
+
 </style>

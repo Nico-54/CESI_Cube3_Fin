@@ -43,7 +43,6 @@ router.get('/payment/id', authentification, async (req, res) => {
 
 
 //READ ALL PAYMENT COMPANY
-// a modifier !!!!
 router.get('/payments/company', authentification, async (req, res) => {
     try {
         const companyId = req.body.companyId;

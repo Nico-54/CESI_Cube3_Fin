@@ -35,9 +35,13 @@ router.post('/mod_sub', authentification, async (req, res) => {
 });
 
 
-// READ MODULES ON SUBSCRIPTION BY ID
+// READ MODULES ON SUBSCRIPTION BY ID BY SUPER_ADMIN
 router.get('/mod_sub/id_sub', authentification, async (req, res) => {
     try {
+        if (req.user.role !== 'super_admin') {
+            return res.status(403).send("Accès interdit - Réservé aux super admins");
+        }
+
         const subscriptionId = req.body.subscriptionId;
 
         const subscription = await Subscription.findById(subscriptionId);

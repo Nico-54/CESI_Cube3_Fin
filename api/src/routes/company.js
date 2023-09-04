@@ -99,24 +99,19 @@ router.patch('/company/me', authentification, async (req, res) => {
 });
 
 
-// DELETE COMPANY BY CURRENT USER'S COMPANY
-router.delete('/companies', authentification, async (req, res) => {
+// DELETE USER ID by SUPER_ADMIN
+router.post('/company/id', authentification, async(req, res) => {  
     try {
-        const companyId = req.user.idCompany;
+        const companyId = req.body.companyId;
+            if (req.user.role !== 'super_admin') {
+                return res.status(403).send("Accès interdit - Réservé aux super admins");
+            }
+            const user = await User.deleteOne({_id:companyId})
 
-        if (!companyId) {
-            return res.status(404).send("Aucune entreprise associée à l'utilisateur.");
-        }
-
-        const company = await Company.findById(companyId);
-        if (!company) {
-            return res.status(404).send("Entreprise introuvable.");
-        }
-
-        await company.remove();
+        console.log("deleted");
         res.send(company);
     } catch (e) {
-        res.status(500).send(e);
+        res.status(500).send(e)
     }
 });
 
